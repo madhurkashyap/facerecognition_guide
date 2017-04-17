@@ -49,7 +49,7 @@ def lda(X, y, num_components=0):
 		Xi = X[np.where(y==i)[0],:]
 		meanClass = Xi.mean(axis=0)
 		Sw = Sw + np.dot((Xi-meanClass).T, (Xi-meanClass))
-		Sb = Sb + n * np.dot((meanClass - meanTotal).T, (meanClass - meanTotal))
+		Sb = Sb + len(Xi) * np.dot((meanClass - meanTotal).T, (meanClass - meanTotal))
 	eigenvalues, eigenvectors = np.linalg.eig(np.linalg.inv(Sw)*Sb)
 	idx = np.argsort(-eigenvalues.real)
 	eigenvalues, eigenvectors = eigenvalues[idx], eigenvectors[:,idx]
